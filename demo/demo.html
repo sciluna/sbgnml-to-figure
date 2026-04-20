@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sbgnml-to-figure - Interactive Demo</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; gap: 20px; padding: 20px; background-color: #f0f2f5; align-items: flex-start; }
+        .controls { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); flex-shrink: 0; width: 280px; }
+        .controls h2 { margin-top: 0; font-size: 1.2rem; color: #2c3e50; }
+        .control-group { margin-bottom: 20px; }
+        .control-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; font-size: 0.9rem; }
+        select, input[type="file"] { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; border-radius: 4px; border: none; background-color: #007bff; color: white; font-size: 16px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #c0c0c0; cursor: not-allowed; }
+        .divider { text-align: center; margin: 15px 0; color: #888; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; }
+        
+        #viewer { 
+            border: 2px dashed #d0d0d0; 
+            background: white; 
+            min-height: 600px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        svg { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <h2>sbgnml-to-figure</h2>
+        
+        <div class="control-group">
+            <label for="sample-selector">1. Load a Sample</label>
+            <select id="sample-selector">
+                <option value="">-- Choose a sample --</option>
+                <option value="./samples/neuronal_muscle_signaling.sbgn">Neuronal Muscle Signalling</option>
+                <option value="./samples/cam-camk_dependent_signaling_to_the_nucleus.sbgn">CaM-CaMK dependent signaling to nucleus</option>
+                <option value="./samples/activated_stat1alpha_induction_of_the_irf1_gene.sbgn">Activated STAT1alpha induction of the IRF1 gene</option>
+                <option value="./samples/glycolysis.sbgn">Glycolysis</option>
+                <option value="./samples/polyq_proteins_interference.sbgn">PolyQ proteins interference</option>
+                <option value="./samples/transforming_growth_factor_beta_signaling.sbgn">Transforming growth factor beta (TGFB) signaling</option>
+                <option value="./samples/repressilator.sbgn">Repressilator</option>
+                <option value="./samples/epidermal_growth_factor_receptor.sbgn">Epidermal growth factor receptor</option>
+            </select>
+        </div>
+
+        <div class="divider">OR</div>
+
+        <div class="control-group">
+            <label for="file-input">Upload Your Own File</label>
+            <input type="file" id="file-input" accept=".sbgnml,.xml,.sbgn" />
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+        <div class="control-group">
+            <label for="theme-selector">2. Select a Theme</label>
+            <select id="theme-selector">
+                <option value="cool">Cool</option>
+                <option value="warm">Warm</option>
+                <option value="colorblind">Colorblind Safe</option>
+                <option value="bluescale">Bluescale</option>
+                <option value="blank">Blank</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>3. Export</label>
+            <button id="download-button" disabled>Download SVG</button>
+        </div>
+    </div>
+
+    <div id="viewer">
+        <p style="color: #999;">Select a sample or upload a file to begin.</p>
+    </div>
+
+    <!-- Your bundled library -->
+    <script src="../dist/sbgnml-to-figure.umd.js"></script>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const sampleSelector = document.getElementById('sample-selector');
+        const themeSelector = document.getElementById('theme-selector');
+        const downloadButton = document.getElementById('download-button');
+        const viewer = document.getElementById('viewer');
+
+        let lastSbgnmlContent = null;
+        let lastFileName = 'figure.svg';
+
+        function renderCurrentFigure() {
+            if (!lastSbgnmlContent) {
+                viewer.innerHTML = '<p style="color: #999;">Select a sample or upload a file to begin.</p>';
+                return;
+            }
+
+            const selectedTheme = themeSelector.value;
+
+            try {
+                // Generate the SVG
+                const svgContent = SbgnmlToFigure.generate(lastSbgnmlContent, { theme: selectedTheme, useParentThemeForIcons: true });
+                viewer.innerHTML = svgContent;
+                downloadButton.disabled = false; // Enable download
+            } catch (err) {
+                console.error("Error generating figure:", err);
+                viewer.innerHTML = `<p style="color: red;">Error: ${err.message}</p>`;
+                downloadButton.disabled = true;
+            }
+        }
+
+        function downloadSVG() {
+            const svgData = viewer.innerHTML;
+            const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = lastFileName.replace(/(\.sbgnml|\.xml|\.sbgn)$/i, '.svg'); 
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // --- NEW: Load Sample Logic ---
+        sampleSelector.addEventListener('change', async (e) => {
+            const sampleUrl = e.target.value;
+            if (!sampleUrl) return;
+
+            try {
+                viewer.innerHTML = '<p style="color: #666;">Loading sample...</p>';
+                
+                // Clear the file input so the user isn't confused about what is active
+                fileInput.value = ''; 
+
+                // Fetch the XML file from the server/local folder
+                const response = await fetch(sampleUrl);
+                if (!response.ok) throw new Error(`Failed to load file: ${response.statusText}`);
+                
+                lastSbgnmlContent = await response.text();
+                
+                // Extract filename for the download button (e.g., "sample1.sbgn" -> "sample1.svg")
+                lastFileName = sampleUrl.split('/').pop() || 'sample.sbgn';
+                
+                renderCurrentFigure();
+            } catch (err) {
+                console.error(err);
+                viewer.innerHTML = `<p style="color: red;">Error loading sample. Ensure you are running a local server.</p>`;
+            }
+        });
+
+        // Upload File Logic
+        fileInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            // Reset the sample dropdown so the user knows the uploaded file is active
+            sampleSelector.value = ''; 
+            
+            lastFileName = file.name; 
+            lastSbgnmlContent = await file.text();
+            renderCurrentFigure();
+        });
+
+        themeSelector.addEventListener('change', renderCurrentFigure);
+        downloadButton.addEventListener('click', downloadSVG);
+    </script>
+</body>
+</html>

@@ -10,6 +10,19 @@
       <bbox x="280.63084958388345" y="405.4772491579664" w="60" h="30"/>
     </glyph>
     <glyph id="be08c23c-dca4-43cd-b8a6-06f6ebdaf710" class="macromolecule" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-pt5lebkx0">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/hgnc:34325"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="SNARE"/>
       <bbox x="289.2381444353563" y="281.1126901621377" w="60" h="30"/>
     </glyph>
@@ -19,18 +32,70 @@
       <port id="_96b935d7-083c-468d-8607-d3b70fff10a7.2" x="276.7377251744353" y="362.7140970980073"/>
     </glyph>
     <glyph id="_9007194d-c2e6-4939-a795-be71ae35a60d" class="compartment" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-xrf78hlj0">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/go:0008021"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="synaptic vesicle"/>
       <bbox x="282.63502448654714" y="165.07138059900043" w="61.25" h="61.25"/>
     </glyph>
     <glyph id="a083be43-422d-9067-c688-661cec17e472" class="simple chemical" compartmentRef="_9007194d-c2e6-4939-a795-be71ae35a60d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-su0cy5b2x">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:15355"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="ACh"/>
       <bbox x="298.26002448654714" y="180.69638059900043" w="30" h="30"/>
     </glyph>
     <glyph id="d2531344-d005-4b92-afd2-14dcb7d40965" class="simple chemical" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-ky3ygplrk">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:15355"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="ACh"/>
       <bbox x="187.83618423934377" y="241.26985535879567" w="30" h="30"/>
     </glyph>
     <glyph id="_135e2807-2b5c-4886-bbdf-d3c8bf433ab9" class="simple chemical" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-vaszhoei1">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:15354"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="choline"/>
       <bbox x="210.57454073863525" y="332.51334548303436" w="30" h="30"/>
     </glyph>
@@ -44,6 +109,19 @@
       <port id="_2bdf0056-96f6-4184-a214-8c7cc7da6214.2" x="168.97968945954386" y="303.4300171941685"/>
     </glyph>
     <glyph id="ce103257-dbf5-430f-9e6c-1745990341de" class="macromolecule" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-1h4qwn1tw">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/hgnc:1912"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="ChAT"/>
       <bbox x="64.42057094147538" y="273.97879870320736" w="60" h="30"/>
     </glyph>
@@ -57,18 +135,70 @@
       <port id="_3797d8d2-4f00-4d1f-9d85-ecad1e61746d.2" x="266.46828048659813" y="209.34224499443798"/>
     </glyph>
     <glyph id="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d" class="compartment">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-sjguil84a">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/go:0043083"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="synaptic cleft"/>
       <bbox x="422.2398870476601" y="194.00340042086597" w="218.00901463861186" h="202.01086590823894"/>
     </glyph>
     <glyph id="b88b6460-4172-427f-abbe-d7c0f0a174ce" class="macromolecule" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-z0yetcxdq">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/hgnc:108"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="AChE"/>
       <bbox x="564.623901686272" y="297.71198411602137" w="60" h="30"/>
     </glyph>
     <glyph id="fb8eb6bc-a39a-4361-b938-026a3b63a9b9" class="simple chemical" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-w662g3pb7">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:15354"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="choline"/>
       <bbox x="437.86488704766015" y="293.9838395208504" w="30" h="30"/>
     </glyph>
     <glyph id="_8ba53135-01b4-4a4b-b87d-a5971850cb39" class="simple chemical" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-3gvakt7y2">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:30089"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="acetate"/>
       <bbox x="506.90303800543836" y="350.38926632910494" w="30" h="30"/>
     </glyph>
@@ -83,6 +213,19 @@
       <port id="d9e08f4b-94b8-4285-af36-f4159b56a2fc.2" x="498.96706701680165" y="219.628400420866"/>
     </glyph>
     <glyph id="_06e41c55-1352-407e-9c4b-604d3f5f616b" class="simple chemical" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-8d7qlqe62">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:15355"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="ACh"/>
       <bbox x="533.9835079953723" y="229.6074232490132" w="30" h="30"/>
     </glyph>
@@ -91,6 +234,19 @@
       <bbox x="709.2729209265942" y="71.69128590015737" w="745.9020162661556" h="409.70484179076595"/>
     </glyph>
     <glyph id="f3ac8950-6d69-4c5b-92dd-3020906ea2c8" class="macromolecule" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-sxdnk60ha">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/fplx:CHRN"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="nAChR"/>
       <bbox x="724.8979209265941" y="281.98298496426975" w="60" h="30"/>
       <glyph id="f3ac8950-6d69-4c5b-92dd-3020906ea2c8_0" class="unit of information">
@@ -102,6 +258,19 @@
       </glyph>
     </glyph>
     <glyph id="_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0" class="macromolecule" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-oxupvcby0">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/fplx:CHRN"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="nAChR"/>
       <bbox x="846.1622909231087" y="225.61325241554542" w="60" h="30"/>
       <glyph id="_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0_0" class="unit of information">
@@ -127,18 +296,70 @@
       <port id="d756f4ab-9813-4d55-aa86-c37dc7f3b286.2" x="967.7652100707942" y="222.97011466263703"/>
     </glyph>
     <glyph id="_1129b8c7-71da-4a6c-8681-3082e6f04a6c" class="complex" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+        <extension>
+          <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#node-j8tvt4pvi">
+                <bqbiol:is>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://bioregistry.io/fplx:Myosin_complex"/>
+                  </rdf:Bag>
+                </bqbiol:is>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
       <label text="myosin"/>
       <bbox x="1089.2391734843104" y="110.32003199879449" w="83.25" h="96.5"/>
       <glyph id="_26a815b4-64c3-4797-9bfd-7dceafb3345d" class="macromolecule">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-lenehx2ut">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/fplx:Myosin_complex"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
         <label text="myosin"/>
         <bbox x="1100.8641734843104" y="121.94503199879449" w="60" h="30"/>
       </glyph>
       <glyph id="_5fcbfc9c-92a0-45b2-834b-ad8866d4008b" class="simple chemical">
+        <extension>
+          <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#node-7pa8cak42">
+                <bqbiol:is>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://bioregistry.io/chebi:15422"/>
+                  </rdf:Bag>
+                </bqbiol:is>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
         <label text="ATP"/>
         <bbox x="1100.8641734843104" y="165.1950319987945" w="30" h="30"/>
       </glyph>
     </glyph>
     <glyph id="_9b7f467a-30eb-4b8e-a966-43692648a46e" class="macromolecule" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+        <extension>
+          <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#node-sacpw4rqw">
+                <bqbiol:is>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://bioregistry.io/fplx:Actin"/>
+                  </rdf:Bag>
+                </bqbiol:is>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
       <label text="actin"/>
       <bbox x="1137.232065433169" y="239.1061773642009" w="60" h="30"/>
     </glyph>
@@ -153,10 +374,36 @@
       <port id="_97c2c87b-c5d2-41fb-97f6-a1001075cf08.2" x="1242.6834176560862" y="255.7282792544105"/>
     </glyph>
     <glyph id="a0a8dd07-644b-4646-a305-ef249fa67752" class="macromolecule" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-ryf3fk65u">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/fplx:Myosin_complex"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="myosin"/>
       <bbox x="1251.5646102761618" y="177.42945028801165" w="60" h="30"/>
     </glyph>
     <glyph id="_20e434c6-e738-4ae5-8a8a-e49f53fe85fb" class="simple chemical" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+        <extension>
+          <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#node-eve5d1m3j">
+                <bqbiol:is>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://bioregistry.io/chebi:15422"/>
+                  </rdf:Bag>
+                </bqbiol:is>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
       <label text="ATP"/>
       <bbox x="1254.267925372915" y="87.3162859001574" w="30" h="30"/>
     </glyph>
@@ -171,10 +418,36 @@
         <bbox x="1303.4113555740905" y="272.89209179311297" w="24.462890625" h="12"/>
       </glyph>
       <glyph id="_1ce3ffae-f9a7-09a1-c91f-bf176708c1d2" class="macromolecule">
+        <extension>
+          <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#node-ngvkkdtcq">
+                <bqbiol:is>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://bioregistry.io/fplx:Myosin_complex"/>
+                  </rdf:Bag>
+                </bqbiol:is>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
         <label text="myosin"/>
         <bbox x="1284.63334110702" y="290.51709179311297" w="60" h="30"/>
       </glyph>
       <glyph id="_0fbd0d13-c59b-48ab-240d-c262dd1bc480" class="macromolecule">
+        <extension>
+          <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#node-cpzhgy5v3">
+                <bqbiol:is>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://bioregistry.io/fplx:Actin"/>
+                  </rdf:Bag>
+                </bqbiol:is>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
         <label text="actin"/>
         <bbox x="1284.63334110702" y="333.76709179311297" w="60" h="30"/>
       </glyph>
@@ -194,14 +467,53 @@
         <bbox x="1113.78217553811" y="291.6979552597931" w="32.7978515625" h="12"/>
       </glyph>
       <glyph id="_343e0d0d-eeac-5cf5-acec-bc15975650a3" class="macromolecule">
+        <extension>
+          <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#node-xvkpdafa4">
+                <bqbiol:is>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://bioregistry.io/fplx:Myosin_complex"/>
+                  </rdf:Bag>
+                </bqbiol:is>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
         <label text="myosin"/>
         <bbox x="1075.4814740619977" y="309.3229552597931" w="60" h="30"/>
       </glyph>
       <glyph id="_96e17352-dd50-0332-a224-954cd97fc3c2" class="macromolecule">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-1g8ky0qr2">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/fplx:Actin"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
         <label text="actin"/>
         <bbox x="1075.4814740619977" y="352.5729552597931" w="60" h="30"/>
       </glyph>
       <glyph id="a3f830ac-34e3-466a-62ac-642bc3e51777" class="simple chemical">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-d5nn42ifc">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:15422"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
         <label text="ATP"/>
         <bbox x="1148.7314740619977" y="309.3229552597931" w="30" h="30"/>
       </glyph>
@@ -212,14 +524,53 @@
       <port id="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8.2" x="1245.101962146628" y="390.3400417018766"/>
     </glyph>
     <glyph id="_6259ebd3-e879-4c70-b442-a602e5408989" class="simple chemical" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-a5ic6u6w9">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:28874"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="Pi"/>
       <bbox x="1203.4940777709794" y="435.7711276909233" w="30" h="30"/>
     </glyph>
     <glyph id="fb04887c-b0a0-4a2d-8cdd-a70826c659ee" class="simple chemical" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-8hfmp238r">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/chebi:16761"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="ADP"/>
       <bbox x="1275.95234244136" y="414.9017615457057" w="30" h="30"/>
     </glyph>
     <glyph id="nwtN_d1535aaf-5d91-4108-9331-852d6acb876e" class="compartment" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-ev4wwtbdd">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/fplx:ESR"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="ER"/>
       <bbox x="914.8053596831671" y="136.04800579840227" w="61.25" h="61.25"/>
     </glyph>

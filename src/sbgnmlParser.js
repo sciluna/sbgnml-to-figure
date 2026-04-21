@@ -30,6 +30,43 @@ export function parseSbgnml(sbgnml) {
   const edges = [];
 
   /**
+   * Navigates the complex RDF annotation structure to find the first resource URL.
+   * @param {Object} glyph - The glyph object from the parser.
+   * @returns {string|null} - The found URL or null.
+   */
+  function extractAnnotationLink(glyph) {
+    try {
+      const annotation = glyph.extension?.annotation;
+      if (!annotation) return null;
+
+      // RDF/XML yapısı genellikle bu sırayı izler
+      const rdfDescription = annotation['rdf:RDF']?.['rdf:Description'];
+      if (!rdfDescription) return null;
+
+      // Tüm 'is' veya 'hasPart' gibi niteleyicileri kontrol et
+      for (const key in rdfDescription) {
+        if (key.includes('is') || key.includes('hasPart')) {
+          const bag = rdfDescription[key]?.['rdf:Bag'];
+          if (bag) {
+            const li = bag['rdf:li'];
+            if (Array.isArray(li) && li.length > 0) {
+              // Eğer birden fazla link varsa, ilkini al
+              return li[0]['rdf:resource'];
+            } else if (li) {
+              // Eğer sadece bir tane varsa
+              return li['rdf:resource'];
+            }
+          }
+        }
+      }
+    } catch (e) {
+      // Hata olursa görmezden gel ve devam et
+      console.warn("Could not parse a complex annotation structure.", e);
+    }
+    return null;
+  }
+
+  /**
    * Recursively processes glyphs to handle nesting and auxiliary elements.
    * @param {Object} g - The glyph object from the parser.
    * @param {string|null} parentId - The ID of the parent glyph (e.g., for compartments or complexes).
@@ -87,7 +124,8 @@ export function parseSbgnml(sbgnml) {
       stateVariables,
       unitsOfInformation,
       isClone: g.hasOwnProperty('clone'),
-      isMultimer: typeof g.class === 'string' && g.class.includes('multimer')
+      isMultimer: typeof g.class === 'string' && g.class.includes('multimer'),
+      link: extractAnnotationLink(g)
     });
 
     // Recursively process nested glyphs

@@ -1468,9 +1468,29 @@ function Je(e) {
 		].includes(e)
 	}).parse(e).sbgn;
 	if (!t || !t.map || t.map.length === 0) throw Error("Invalid SBGN-ML: <sbgn> or <map> elements are missing.");
-	let n = t.map[0], r = [], i = [], a = (e, t = null) => {
+	let n = t.map[0], r = [], i = [];
+	function a(e) {
+		try {
+			let t = e.extension?.annotation;
+			if (!t) return null;
+			let n = t["rdf:RDF"]?.["rdf:Description"];
+			if (!n) return null;
+			for (let e in n) if (e.includes("is") || e.includes("hasPart")) {
+				let t = n[e]?.["rdf:Bag"];
+				if (t) {
+					let e = t["rdf:li"];
+					if (Array.isArray(e) && e.length > 0) return e[0]["rdf:resource"];
+					if (e) return e["rdf:resource"];
+				}
+			}
+		} catch (e) {
+			console.warn("Could not parse a complex annotation structure.", e);
+		}
+		return null;
+	}
+	let o = (e, t = null) => {
 		if (e.class === "state variable" || e.class === "unit of information") return;
-		let n = [], i = [], o = [];
+		let n = [], i = [], s = [];
 		e.glyph && e.glyph.forEach((e) => {
 			e.class === "state variable" ? n.push({
 				id: e.id,
@@ -1488,7 +1508,7 @@ function Je(e) {
 				width: parseFloat(e.bbox?.w || 0),
 				height: parseFloat(e.bbox?.h || 0),
 				entityName: e.entity?.name ? e.entity?.name == "perturbation" ? "perturbing agent" : e.entity?.name : e.entity?.name || null
-			}) : o.push(e);
+			}) : s.push(e);
 		}), r.push({
 			id: e.id,
 			type: e.class,
@@ -1501,10 +1521,11 @@ function Je(e) {
 			stateVariables: n,
 			unitsOfInformation: i,
 			isClone: e.hasOwnProperty("clone"),
-			isMultimer: typeof e.class == "string" && e.class.includes("multimer")
-		}), o.forEach((t) => a(t, e.id));
+			isMultimer: typeof e.class == "string" && e.class.includes("multimer"),
+			link: a(e)
+		}), s.forEach((t) => o(t, e.id));
 	};
-	return n.glyph && n.glyph.forEach((e) => a(e)), n.arc && n.arc.forEach((e) => {
+	return n.glyph && n.glyph.forEach((e) => o(e)), n.arc && n.arc.forEach((e) => {
 		i.push({
 			id: e.id,
 			source: e.source,
@@ -2057,32 +2078,48 @@ function Xe(e) {
 function Ze(e, t, n = {}) {
 	let { width: r, height: i, label: a, id: o, x: s, y: c } = e, l = t.macromolecule, u = Math.max(4, Math.min(i * .25, 12)), d = n.isIcon || !1, f = d ? "" : $(a, r, i, 12, l.text, "normal");
 	e.strokeColor = l.stroke;
-	let p = X(e), m = Z(e);
-	return `
-    <g class="node-group macromolecule" id="${o}" transform="translate(${s}, ${c})">
-      ${p}
-      <rect width="${r}" height="${i}" rx="${u}" ry="${u}"
-            fill="${l.fill}" stroke="${l.stroke}" stroke-width="2" filter="url(#dropShadow)" />
-      ${m}
-      ${f}
-      ${d ? "" : Y(e, t, n)}
-    </g>
+	let p = X(e), m = Z(e), h = `
+    ${p}
+    <rect width="${r}" height="${i}" rx="${u}" ry="${u}"
+          fill="${l.fill}" stroke="${l.stroke}" stroke-width="2" filter="url(#dropShadow)" />
+    ${m}
+    ${f}
+    ${d ? "" : Y(e, t, n)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="node-group macromolecule" id="${o}" transform="translate(${s}, ${c})">
+          ${h}
+        </g>
+      </a>
+    ` : `
+      <g class="node-group macromolecule" id="${o}" transform="translate(${s}, ${c})">
+        ${h}
+      </g>
+    `;
 }
 function Qe(e, t, n = { isIcon: !1 }) {
 	let { width: r, height: i, label: a, id: o, x: s, y: c } = e, l = i / 2, u = t.simpleChemical, d = n.isIcon ? "" : $(a, r, i, 11, u.text, "normal");
 	e.strokeColor = u.stroke;
-	let f = X(e), p = Z(e);
-	return `
-    <g class="node-group simple-chemical" id="${o}" transform="translate(${s}, ${c})">
-      ${f}
-      <rect width="${r}" height="${i}" rx="${l}" ry="${l}"
-            fill="${u.fill}" stroke="${u.stroke}" stroke-width="2" filter="url(#dropShadow)" />
-      ${p}
-      ${d}
-      ${n.isIcon ? "" : Y(e, t, n)}
-    </g>
+	let f = X(e), p = Z(e), m = `
+    ${f}
+    <rect width="${r}" height="${i}" rx="${l}" ry="${l}"
+          fill="${u.fill}" stroke="${u.stroke}" stroke-width="2" filter="url(#dropShadow)" />
+    ${p}
+    ${d}
+    ${n.isIcon ? "" : Y(e, t, n)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="node-group simple-chemical" id="${o}" transform="translate(${s}, ${c})">
+          ${m}
+        </g>
+      </a>
+    ` : `
+      <g class="node-group simple-chemical" id="${o}" transform="translate(${s}, ${c})">
+        ${m}
+      </g>
+    `;
 }
 function q(e, t, n, r = { isIcon: !1 }) {
 	let { width: i, height: a, label: o, id: s, x: c, y: l } = e, u = n.complex, d = !1;
@@ -2091,79 +2128,120 @@ function q(e, t, n, r = { isIcon: !1 }) {
 	o && (f = d ? `<text x="${i / 2}" y="${a + 10}" text-anchor="middle" dominant-baseline="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="${u.text}">${o}</text>` : r.isIcon ? "" : $(o, i, a, 11, u.text, "bold"));
 	let p = Math.min(i, a) * .15, m = `M ${p},0 L ${i - p},0 L ${i},${p} L ${i},${a - p} L ${i - p},${a} L ${p},${a} L 0,${a - p} L 0,${p} Z`;
 	e.strokeColor = u.stroke;
-	let h = X(e), g = Z(e);
-	return `
-    <g class="node-group complex" id="${s}" transform="translate(${c}, ${l})">
-      <g class="complex-background">
-        ${h}
-        <path d="${m}" fill="${u.fill}" stroke="${u.stroke}" stroke-width="2" filter="url(#dropShadow)" />
-        ${g}
-      </g>
-      ${f}
-      ${r.isIcon ? "" : Y(e, n, r)}
+	let h = X(e), g = Z(e), _ = `
+    <g class="complex-background">
+      ${h}
+      <path d="${m}" fill="${u.fill}" stroke="${u.stroke}" stroke-width="2" filter="url(#dropShadow)" />
+      ${g}
     </g>
+    ${f}
+    ${r.isIcon ? "" : Y(e, n, r)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="node-group complex" id="${s}" transform="translate(${c}, ${l})">
+          ${_}
+        </g>
+      </a>
+    ` : `
+      <g class="node-group complex" id="${s}" transform="translate(${c}, ${l})">
+        ${_}
+      </g>
+    `;
 }
 function $e(e, t, n = { isIcon: !1 }) {
 	let { width: r, height: i, label: a, id: o, x: s, y: c } = e, l = Math.min(r, i) * .2, u = t.nucleicAcidFeature, d = `M 0 0 L ${r} 0 L ${r} ${i - l} Q ${r} ${i} ${r - l} ${i} L ${l} ${i} Q 0 ${i} 0 ${i - l} Z`, f = n.isIcon ? "" : $(a, r, i, 12, u.text, "normal");
 	e.strokeColor = u.stroke;
-	let p = X(e), m = Z(e);
-	return `
-    <g class="node-group nucleic-acid" id="${o}" transform="translate(${s}, ${c})">
-      ${p}
-      <path d="${d}" fill="${u.fill}" stroke="${e.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
-      ${m}
-      ${f}
-      ${n.isIcon ? "" : Y(e, t, n)}
-    </g>
+	let p = X(e), m = Z(e), h = `
+    ${p}
+    <path d="${d}" fill="${u.fill}" stroke="${e.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
+    ${m}
+    ${f}
+    ${n.isIcon ? "" : Y(e, t, n)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="node-group nucleic-acid" id="${o}" transform="translate(${s}, ${c})">
+          ${h}
+        </g>
+      </a>
+    ` : `
+      <g class="node-group nucleic-acid" id="${o}" transform="translate(${s}, ${c})">
+        ${h}
+      </g>
+    `;
 }
 function et(e, t, n = { isIcon: !1 }) {
-	let { width: r, height: i, label: a, id: o, x: s, y: c } = e, l = r * .15, u = `0,${i / 2} ${l},0 ${r - l},0 ${r},${i / 2} ${r - l},${i} ${l},${i}`, d = t.phenotype, f = n.isIcon ? "" : $(a, r, i, 12, d.text, "normal");
-	return `
-    <g class="node-group phenotype" id="${o}" transform="translate(${s}, ${c})">
-      <polygon points="${u}" fill="${d.fill}" stroke="${d.stroke}"  stroke-width="2" filter="url(#dropShadow)" />
-      ${f}
-      ${n.isIcon ? "" : Y(e, t, n)}
-    </g>
+	let { width: r, height: i, label: a, id: o, x: s, y: c } = e, l = r * .15, u = `0,${i / 2} ${l},0 ${r - l},0 ${r},${i / 2} ${r - l},${i} ${l},${i}`, d = t.phenotype, f = n.isIcon ? "" : $(a, r, i, 12, d.text, "normal"), p = `
+    <polygon points="${u}" fill="${d.fill}" stroke="${d.stroke}"  stroke-width="2" filter="url(#dropShadow)" />
+    ${f}
+    ${n.isIcon ? "" : Y(e, t, n)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="node-group phenotype" id="${o}" transform="translate(${s}, ${c})">
+          ${p}
+        </g>
+      </a>
+    ` : `
+      <g class="node-group phenotype" id="${o}" transform="translate(${s}, ${c})">
+        ${p}
+      </g>
+    `;
 }
 function tt(e, t, n = { isIcon: !1 }) {
 	let { width: r, height: i, label: a, id: o, x: s, y: c } = e, l = r / 2, u = i / 2, d = t.unspecifiedEntity, f = n.isIcon ? "" : $(a, r, i, 12, d.text, "normal");
 	e.strokeColor = d.stroke;
-	let p = Z(e);
-	return `
-    <g class="node-group unspecified-entity" id="${o}" transform="translate(${s}, ${c})">
-      <ellipse cx="${l}" cy="${u}" rx="${l}" ry="${u}" 
-               fill="${d.fill}" stroke="${e.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
-      ${p}
-      ${f}
-      ${n.isIcon ? "" : Y(e, t, n)}
-    </g>
+	let p = Z(e), m = `
+    <ellipse cx="${l}" cy="${u}" rx="${l}" ry="${u}" 
+              fill="${d.fill}" stroke="${e.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
+    ${p}
+    ${f}
+    ${n.isIcon ? "" : Y(e, t, n)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="node-group unspecified-entity" id="${o}" transform="translate(${s}, ${c})">
+          ${m}
+        </g>
+      </a>
+    ` : `
+      <g class="node-group unspecified-entity" id="${o}" transform="translate(${s}, ${c})">
+        ${m}
+      </g>
+    `;
 }
 function nt(e, t, n = { isIcon: !1 }) {
 	let { width: r, height: i, label: a, id: o, x: s, y: c } = e, l = r * .15, u = `0,0 ${r},0 ${r - l},${i / 2} ${r},${i} 0,${i} ${l},${i / 2}`, d = t.perturbingAgent, f = n.isIcon ? "" : $(a, r, i, 12, d.text, "normal");
 	e.strokeColor = d.stroke;
-	let p = Z(e);
-	return `
-    <g class="node-group perturbing-agent" id="${o}" transform="translate(${s}, ${c})">
-      <polygon points="${u}" fill="${d.fill}" stroke="${e.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
-      ${p}
-      ${f}
-      ${n.isIcon ? "" : Y(e, t, n)}
-    </g>
+	let p = Z(e), m = `
+    <polygon points="${u}" fill="${d.fill}" stroke="${e.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
+    ${p}
+    ${f}
+    ${n.isIcon ? "" : Y(e, t, n)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="node-group perturbing-agent" id="${o}" transform="translate(${s}, ${c})">
+          ${m}
+        </g>
+      </a>
+    ` : `
+      <g class="node-group perturbing-agent" id="${o}" transform="translate(${s}, ${c})">
+        ${m}
+      </g>
+    `;
 }
 function rt(e, t) {
-	let n = e.width / 2, r = e.height / 2, i = Math.min(n, r), a = t.emptySet, o = i * .7071;
+	let n = e.width / 2, r = e.height / 2, i = Math.min(n, r), a = t.emptySet, o = i * 1.5 * .7071;
 	return `
     <g class="node-group" id="${e.id}" transform="translate(${e.x}, ${e.y})">
       <!-- Main Circle -->
-      <circle cx="${n}" cy="${r}" r="${i}" fill="${a.fill}" stroke="${a.stroke}"  stroke-width="2" />
-      <!-- Diagonal Line -->
+      <circle cx="${n}" cy="${r}" r="${i}" fill="${a.fill}" stroke="${a.stroke}" stroke-width="2" />
+      
+      <!-- Extended Diagonal Line -->
       <line x1="${n + o}" y1="${r - o}" x2="${n - o}" y2="${r + o}" 
-            stroke="${a.stroke}"  stroke-width="2" />
+            stroke="${a.stroke}" stroke-width="2" />
       
       <!-- Normally empty sets have no label, but if one exists, render it below -->
       ${e.label ? `
@@ -2178,22 +2256,32 @@ function rt(e, t) {
 }
 function it(e, t, n = { isIcon: !1 }) {
 	let r = e.width, i = e.height, a = t.compartment, o = a.fill, s = a.stroke, c = "";
-	return e.label && (c = `
+	e.label && (c = `
       <text x="${r / 2}" y="${i + 12}" 
             text-anchor="middle" dominant-baseline="middle" 
             font-family="Arial, Helvetica, sans-serif" 
             font-size="14" font-weight="bold" fill="${a.text}" >
         ${e.label}
       </text>
-    `), `
-    <g class="compartment-node" id="${e.id}" transform="translate(${e.x}, ${e.y})">
-      <rect width="${r}" height="${i}" rx="20" ry="20" 
-            fill="${o}" 
-            stroke="${s}" stroke-width="4" />
-      ${c}
-      ${n.isIcon ? "" : Y(e, t, n)}
-    </g>
+    `);
+	let l = `
+    <rect width="${r}" height="${i}" rx="20" ry="20" 
+          fill="${o}" 
+          stroke="${s}" stroke-width="4" />
+    ${c}
+    ${n.isIcon ? "" : Y(e, t, n)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="compartment-node" id="${e.id}" transform="translate(${e.x}, ${e.y})">
+          ${l}
+        </g>
+      </a>
+    ` : `
+      <g class="compartment-node" id="${e.id}" transform="translate(${e.x}, ${e.y})">
+        ${l}
+      </g>
+    `;
 }
 function at(e, t) {
 	let n = e.width, r = e.height, i = n / 2, a = r / 2, o = t.process, s = "", c = o.stroke, l = o.fill;
@@ -2292,17 +2380,25 @@ function lt(e) {
 function ut(e, t, n = { isIcon: !1 }) {
 	let { width: r, height: i, label: a, id: o, x: s, y: c } = e, l = t.biologicalActivity || t.macromolecule, u = n.isIcon ? "" : $(a, r, i, 12, l.text, "normal");
 	e.strokeColor = l.stroke;
-	let d = X(e), f = Z(e);
-	return `
-    <g class="node-group biological-activity" id="${o}" transform="translate(${s}, ${c})">
-      ${d}
-      <rect width="${r}" height="${i}" rx="0" ry="0"
-            fill="${l.fill}" stroke="${l.stroke}" stroke-width="2" filter="url(#dropShadow)" />
-      ${f}
-      ${u}
-      ${n.isIcon ? "" : Y(e, t, n)}
-    </g>
+	let d = X(e), f = Z(e), p = `
+    ${d}
+    <rect width="${r}" height="${i}" rx="0" ry="0"
+          fill="${l.fill}" stroke="${l.stroke}" stroke-width="2" filter="url(#dropShadow)" />
+    ${f}
+    ${u}
+    ${n.isIcon ? "" : Y(e, t, n)}
   `;
+	return e.link ? `
+      <a xlink:href="${e.link}" target="_blank" class="node-link">
+        <g class="node-group biological-activity" id="${o}" transform="translate(${s}, ${c})">
+          ${p}
+        </g>
+      </a>
+    ` : `
+      <g class="node-group biological-activity" id="${o}" transform="translate(${s}, ${c})">
+        ${p}
+      </g>
+    `;
 }
 function J(e) {
 	if (!e) return "macromolecule";

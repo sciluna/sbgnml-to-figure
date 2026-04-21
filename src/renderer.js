@@ -196,16 +196,31 @@ function renderMacromolecule(node, theme, options = {}) {
   const multimerMarker = renderMultimerMarker(node);
   const cloneMarker = renderCloneMarker(node);
 
-  return `
-    <g class="node-group macromolecule" id="${id}" transform="translate(${x}, ${y})">
-      ${multimerMarker}
-      <rect width="${width}" height="${height}" rx="${cornerRadius}" ry="${cornerRadius}"
-            fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" filter="url(#dropShadow)" />
-      ${cloneMarker}
-      ${textElement}
-      ${!isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
-    </g>
+  const content = `
+    ${multimerMarker}
+    <rect width="${width}" height="${height}" rx="${cornerRadius}" ry="${cornerRadius}"
+          fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" filter="url(#dropShadow)" />
+    ${cloneMarker}
+    ${textElement}
+    ${!isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="node-group macromolecule" id="${id}" transform="translate(${x}, ${y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="node-group macromolecule" id="${id}" transform="translate(${x}, ${y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 function renderSimpleChemical(node, theme, options = { isIcon: false }) {
@@ -219,16 +234,31 @@ function renderSimpleChemical(node, theme, options = { isIcon: false }) {
   const multimerMarker = renderMultimerMarker(node);
   const cloneMarker = renderCloneMarker(node);
 
-  return `
-    <g class="node-group simple-chemical" id="${id}" transform="translate(${x}, ${y})">
-      ${multimerMarker}
-      <rect width="${width}" height="${height}" rx="${cornerRadius}" ry="${cornerRadius}"
-            fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" filter="url(#dropShadow)" />
-      ${cloneMarker}
-      ${textElement}
-      ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
-    </g>
+  const content = `
+    ${multimerMarker}
+    <rect width="${width}" height="${height}" rx="${cornerRadius}" ry="${cornerRadius}"
+          fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" filter="url(#dropShadow)" />
+    ${cloneMarker}
+    ${textElement}
+    ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="node-group simple-chemical" id="${id}" transform="translate(${x}, ${y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="node-group simple-chemical" id="${id}" transform="translate(${x}, ${y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 /**
@@ -264,18 +294,32 @@ function renderComplex(node, allNodes, theme, options = { isIcon: false }) { // 
   const multimerMarker = renderMultimerMarker(node);
   const cloneMarker = renderCloneMarker(node);
 
-  // --- NİHAİ SVG'Yİ OLUŞTUR ---
-  return `
-    <g class="node-group complex" id="${id}" transform="translate(${x}, ${y})">
-      <g class="complex-background">
-        ${multimerMarker}
-        <path d="${pathData}" fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" filter="url(#dropShadow)" />
-        ${cloneMarker}
-      </g>
-      ${labelElement}
-      ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
+  const content = `
+    <g class="complex-background">
+      ${multimerMarker}
+      <path d="${pathData}" fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" filter="url(#dropShadow)" />
+      ${cloneMarker}
     </g>
+    ${labelElement}
+    ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="node-group complex" id="${id}" transform="translate(${x}, ${y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="node-group complex" id="${id}" transform="translate(${x}, ${y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 /**
@@ -295,15 +339,30 @@ function renderNucleicAcidFeature(node, theme, options = { isIcon: false }) {
   const multimerMarker = renderMultimerMarker(node);
   const cloneMarker = renderCloneMarker(node);
 
-  return `
-    <g class="node-group nucleic-acid" id="${id}" transform="translate(${x}, ${y})">
-      ${multimerMarker}
-      <path d="${pathData}" fill="${colors.fill}" stroke="${node.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
-      ${cloneMarker}
-      ${textElement}
-      ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
-    </g>
+  const content = `
+    ${multimerMarker}
+    <path d="${pathData}" fill="${colors.fill}" stroke="${node.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
+    ${cloneMarker}
+    ${textElement}
+    ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="node-group nucleic-acid" id="${id}" transform="translate(${x}, ${y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="node-group nucleic-acid" id="${id}" transform="translate(${x}, ${y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 /**
@@ -319,13 +378,28 @@ function renderPhenotype(node, theme, options = { isIcon: false }) {
   // Fenotip için nötr, koyu lacivert/gri metin
   const textElement = !options.isIcon ? renderFitText(label, w, h, 12, colors.text, 'normal') : "";
 
-  return `
-    <g class="node-group phenotype" id="${id}" transform="translate(${x}, ${y})">
-      <polygon points="${points}" fill="${colors.fill}" stroke="${colors.stroke}"  stroke-width="2" filter="url(#dropShadow)" />
-      ${textElement}
-      ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
-    </g>
+  const content = `
+    <polygon points="${points}" fill="${colors.fill}" stroke="${colors.stroke}"  stroke-width="2" filter="url(#dropShadow)" />
+    ${textElement}
+    ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="node-group phenotype" id="${id}" transform="translate(${x}, ${y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="node-group phenotype" id="${id}" transform="translate(${x}, ${y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 /**
@@ -343,15 +417,29 @@ function renderUnspecifiedEntity(node, theme, options = { isIcon: false }) {
   // Unspecified entity multimer olmaz, sadece clone marker alır
   const cloneMarker = renderCloneMarker(node);
 
-  return `
-    <g class="node-group unspecified-entity" id="${id}" transform="translate(${x}, ${y})">
-      <ellipse cx="${cx}" cy="${cy}" rx="${cx}" ry="${cy}" 
-               fill="${colors.fill}" stroke="${node.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
-      ${cloneMarker}
-      ${textElement}
-      ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
-    </g>
+  const content = `
+    <ellipse cx="${cx}" cy="${cy}" rx="${cx}" ry="${cy}" 
+              fill="${colors.fill}" stroke="${node.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
+    ${cloneMarker}
+    ${textElement}
+    ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="node-group unspecified-entity" id="${id}" transform="translate(${x}, ${y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="node-group unspecified-entity" id="${id}" transform="translate(${x}, ${y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 /**
@@ -369,14 +457,29 @@ function renderPerturbingAgent(node, theme, options = { isIcon: false }) {
   // Perturbing agent multimer olmaz, clone marker alır
   const cloneMarker = renderCloneMarker(node);
 
-  return `
-    <g class="node-group perturbing-agent" id="${id}" transform="translate(${x}, ${y})">
-      <polygon points="${points}" fill="${colors.fill}" stroke="${node.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
-      ${cloneMarker}
-      ${textElement}
-      ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
-    </g>
+  const content = `
+    <polygon points="${points}" fill="${colors.fill}" stroke="${node.strokeColor}" stroke-width="2" filter="url(#dropShadow)" />
+    ${cloneMarker}
+    ${textElement}
+    ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="node-group perturbing-agent" id="${id}" transform="translate(${x}, ${y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="node-group perturbing-agent" id="${id}" transform="translate(${x}, ${y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 /**
@@ -392,15 +495,20 @@ function renderEmptySet(node, theme) {
   
   // Calculate the coordinates for the diagonal line (top-right to bottom-left)
   // using basic trigonometry (offset = r * sin(45 degrees))
-  const offset = r * 0.7071; 
+  const extensionRatio = 1.5; 
+  const extendedR = r * extensionRatio;
+  
+  // 45 derecelik açının (sin/cos = 0.7071) yeni ve uzatılmış yarıçapa göre hesaplanması
+  const offset = extendedR * 0.7071;  
 
   return `
     <g class="node-group" id="${node.id}" transform="translate(${node.x}, ${node.y})">
       <!-- Main Circle -->
-      <circle cx="${cx}" cy="${cy}" r="${r}" fill="${colors.fill}" stroke="${colors.stroke}"  stroke-width="2" />
-      <!-- Diagonal Line -->
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" />
+      
+      <!-- Extended Diagonal Line -->
       <line x1="${cx + offset}" y1="${cy - offset}" x2="${cx - offset}" y2="${cy + offset}" 
-            stroke="${colors.stroke}"  stroke-width="2" />
+            stroke="${colors.stroke}" stroke-width="2" />
       
       <!-- Normally empty sets have no label, but if one exists, render it below -->
       ${node.label ? `
@@ -443,16 +551,31 @@ function renderCompartment(node, theme, options = { isIcon: false }) {
       </text>
     `;
   }
-  
-  return `
-    <g class="compartment-node" id="${node.id}" transform="translate(${node.x}, ${node.y})">
-      <rect width="${w}" height="${h}" rx="${rx}" ry="${rx}" 
-            fill="${fillColor}" 
-            stroke="${strokeColor}" stroke-width="${strokeWidth}" />
-      ${labelElement}
-      ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
-    </g>
+
+  const content = `
+    <rect width="${w}" height="${h}" rx="${rx}" ry="${rx}" 
+          fill="${fillColor}" 
+          stroke="${strokeColor}" stroke-width="${strokeWidth}" />
+    ${labelElement}
+    ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="compartment-node" id="${node.id}" transform="translate(${node.x}, ${node.y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="compartment-node" id="${node.id}" transform="translate(${node.x}, ${node.y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 /**
@@ -639,16 +762,31 @@ function renderBiologicalActivity(node, theme, options = { isIcon: false }) {
   const multimerMarker = renderMultimerMarker(node);
   const cloneMarker = renderCloneMarker(node);
 
-  return `
-    <g class="node-group biological-activity" id="${id}" transform="translate(${x}, ${y})">
-      ${multimerMarker}
-      <rect width="${width}" height="${height}" rx="${cornerRadius}" ry="${cornerRadius}"
-            fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" filter="url(#dropShadow)" />
-      ${cloneMarker}
-      ${textElement}
-      ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
-    </g>
+  const content = `
+    ${multimerMarker}
+    <rect width="${width}" height="${height}" rx="${cornerRadius}" ry="${cornerRadius}"
+          fill="${colors.fill}" stroke="${colors.stroke}" stroke-width="2" filter="url(#dropShadow)" />
+    ${cloneMarker}
+    ${textElement}
+    ${!options.isIcon ? renderAuxiliaryUnits(node, theme, options) : ''}
   `;
+
+  if (node.link) {
+    return `
+      <a xlink:href="${node.link}" target="_blank" class="node-link">
+        <g class="node-group biological-activity" id="${id}" transform="translate(${x}, ${y})">
+          ${content}
+        </g>
+      </a>
+    `;
+  } 
+  else {
+    return `
+      <g class="node-group biological-activity" id="${id}" transform="translate(${x}, ${y})">
+        ${content}
+      </g>
+    `;
+  }
 }
 
 function getThemeKeyForFype(typeString) {

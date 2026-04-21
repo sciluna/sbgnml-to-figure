@@ -10,6 +10,19 @@
       <port id="glyph6.2" x="316.924783012962" y="437.0211623750535"/>
     </glyph>
     <glyph id="glyph3" class="nucleic acid feature">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-j4harr4du">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/hgnc:6116"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="IRF1"/>
       <bbox x="379.1620543768622" y="422.0211623750535" w="60" h="30"/>
       <glyph id="glyph3_0" class="unit of information">
@@ -29,6 +42,19 @@
       <port id="glyph5.2" x="419.1620543768622" y="510.0054808397"/>
     </glyph>
     <glyph id="glyph15" class="macromolecule">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-j4harr4du">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/hgnc:6116"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="IRF1"/>
       <bbox x="486.02912179116584" y="495.0054808397" w="60" h="30"/>
       <glyph id="glyph15_0" class="unit of information">
@@ -40,6 +66,19 @@
       </glyph>
     </glyph>
     <glyph id="glyph14" class="nucleic acid feature">
+      <extension>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#node-j4harr4du">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://bioregistry.io/hgnc:6116"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
       <label text="IRF1"/>
       <bbox x="345.5013840438063" y="284.0166944941331" w="60" h="30"/>
       <glyph id="glyph14_0" class="unit of information">

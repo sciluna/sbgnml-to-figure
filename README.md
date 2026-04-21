@@ -1,7 +1,7 @@
 # sbgnml-to-figure
 sbgnml-to-figure is a JavaScript library to convert SBGN-ML files into beautiful, publication-ready SVG figures.
 
-Click [here](https://hasanbalci.github.io/sbgnml-to-figure/demo/demo.html) for a demo.
+Click [here](https://sciluna.github.io/sbgnml-to-figure/demo/demo.html) for a demo.
 
 ## Installation
 Install via npm:
